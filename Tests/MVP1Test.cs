@@ -1,10 +1,14 @@
 using Services;
+using Services.Hardwares;
 
 namespace Tests;
 
 public class MVP1Test
 {
-    readonly MachineCafe machineCafe = new();
+    readonly MachineCafe machineCafe = new()
+    {
+        Hardware = new HardwareFaker()
+    };
 
     [Fact]
     public void Servir_un_cafe_test()

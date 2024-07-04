@@ -1,16 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Services.Hardwares;
 
 namespace Services;
 
 public class MachineCafe
 {
-    public byte PrixCafe { get; } = (byte)EPiece._50Centime;
+    public IHardware Hardware { get; init; }
+
+    public byte PrixCafe { get; }
     public uint NbCafeServi { get; set; }
     public uint ArgentTotal { get; set; }
+
+    public MachineCafe()
+    {
+        Hardware = new Hardware();
+        PrixCafe = (byte)EPiece._50Centime;
+    }
 
     public void Inserer(EPiece _piece)
     {
