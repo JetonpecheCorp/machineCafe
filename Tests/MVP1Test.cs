@@ -2,9 +2,9 @@ using Services;
 
 namespace Tests;
 
-public class MVP1_test
+public class MVP1Test
 {
-    MachineCafe machineCafe = new();
+    readonly MachineCafe machineCafe = new();
 
     [Fact]
     public void Servir_un_cafe_test()
