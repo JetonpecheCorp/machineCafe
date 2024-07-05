@@ -1,11 +1,9 @@
-﻿using static System.Runtime.InteropServices.JavaScript.JSType;
-
-namespace Services.Hardwares;
+﻿namespace Services.Hardwares;
 
 public class Hardware : IHardware
 {
-    public Action<EPiece> CallbackInsertionPiece { get; init; } = null!;
-    private int NbCafeFabriquer = 0;
+    public Action<EPiece> CallbackInsertionPiece { get; set; } = null!;
+    public uint NbCafeFabriquer { get; set; }
 
     public bool CoulerCafe()
     {

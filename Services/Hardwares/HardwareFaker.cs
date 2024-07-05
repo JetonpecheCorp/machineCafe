@@ -2,9 +2,9 @@
 
 public class HardwareFaker : IHardware
 {
-    public Action<EPiece> CallbackInsertionPiece { get; init; } = null!;
+    public Action<EPiece> CallbackInsertionPiece { get; set; } = null!;
 
-    private int NbCafeFabriquer = 0;
+    public uint NbCafeFabriquer { get; set; }
 
     public bool CoulerCafe()
     {
@@ -12,5 +12,8 @@ public class HardwareFaker : IHardware
         return true;
     }
 
-    public void SimulerInsertionPiece(EPiece _piece) => CallbackInsertionPiece(_piece);
+    public void SimulerInsertionPiece(EPiece _piece)
+    {
+        CallbackInsertionPiece(_piece);
+    }
 }

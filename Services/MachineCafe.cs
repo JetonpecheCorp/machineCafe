@@ -13,6 +13,7 @@ public class MachineCafe
     public MachineCafe()
     {
         Hardware = new Hardware();
+        Hardware.CallbackInsertionPiece = Inserer;
         PrixCafe = (byte)EPiece._50Centime;
     }
 
