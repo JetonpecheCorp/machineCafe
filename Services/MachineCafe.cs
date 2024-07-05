@@ -19,18 +19,22 @@ public class MachineCafe
 
     public void Inserer(EPiece _piece)
     {
+        ArgentTotal += (byte)_piece;
+
         if ((byte)ArgentTotal < PrixCafe)
             return;
 
         Hardware.CoulerCafe();
-        ArgentTotal += (byte)_piece;
     }
+
+    public void Annuler() => ArgentTotal = 0;
+    public void Valider() => Hardware.CoulerCafe();
 
     public void SansContact(ICarteBleu _carteBleu)
     {
         if (ArgentTotal > 0)
         {
-            ArgentTotal = 0;
+            Hardware.RendreArgent();
             return;
         }
 
@@ -40,6 +44,6 @@ public class MachineCafe
             return;
 
         ArgentTotal += (byte)EPiece._50Centime;
-        Hardware.CoulerCafe();
+        Hardware.AccepterArgent();
     }
 }

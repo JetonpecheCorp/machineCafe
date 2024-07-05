@@ -1,4 +1,5 @@
 using Services;
+using Services.CarteBleus;
 using Services.Hardwares;
 
 namespace Tests;
@@ -15,6 +16,37 @@ public class MVP1Test
         };
 
         machineCafe.Hardware.CallbackInsertionPiece = machineCafe.Inserer;
+        machineCafe.Hardware.CallbackAnnuler = machineCafe.Annuler;
+        machineCafe.Hardware.CallbackAccepter = machineCafe.Valider;
+    }
+
+    [Fact]
+    public void Payer_sans_contact_test()
+    {
+        CarteBleuFaker cb = new("1234-1234-1234-1234", 10);
+        machineCafe.SansContact(cb);
+
+        Assert.Equal(1, (int)machineCafe.Hardware.NbCafeFabriquer);
+    }
+
+    [Fact]
+    public void Payer_sans_contact_et_avec_une_piece_test()
+    {
+        CarteBleuFaker cb = new("1234-1234-1234-1234", 10);
+        machineCafe.Hardware.SimulerInsertionPiece(EPiece._20Centime);
+        machineCafe.SansContact(cb);
+
+        Assert.Equal(0, (int)machineCafe.Hardware.NbCafeFabriquer);
+    }
+
+    [Fact]
+    public void Servir_cafe_multiple_piece_test()
+    {
+        machineCafe.Hardware.SimulerInsertionPiece(EPiece._20Centime);
+        machineCafe.Hardware.SimulerInsertionPiece(EPiece._20Centime);
+        machineCafe.Hardware.SimulerInsertionPiece(EPiece._10Centime);
+
+        Assert.Equal(1, (int)machineCafe.Hardware.NbCafeFabriquer);
     }
 
     [Fact]
@@ -37,7 +69,7 @@ public class MVP1Test
         machineCafe.Hardware.SimulerInsertionPiece(_piece);
 
         Assert.Equal(0, (int)machineCafe.Hardware.NbCafeFabriquer);
-        Assert.Equal(0, (int)machineCafe.ArgentTotal);
+        Assert.Equal((int)_piece, (int)machineCafe.ArgentTotal);
     }
 
     [Theory]

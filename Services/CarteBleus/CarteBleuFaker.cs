@@ -8,7 +8,7 @@ public class CarteBleuFaker : ICarteBleu
     public CarteBleuFaker(string _numero, double _nbArgent)
     {
         Numero = _numero;
-        NbArgent = _nbArgent;
+        NbArgent = _nbArgent * 100;
     }
 
     public bool Debiter(EPiece _piece)
