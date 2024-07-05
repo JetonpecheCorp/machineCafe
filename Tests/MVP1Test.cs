@@ -30,6 +30,15 @@ public class MVP1Test
     }
 
     [Fact]
+    public void Payer_sans_contact_pas_assez_argent_test()
+    {
+        CarteBleuFaker cb = new("1234-1234-1234-1234", 0);
+        machineCafe.SansContact(cb);
+
+        Assert.Equal(0, (int)machineCafe.Hardware.NbCafeFabriquer);
+    }
+
+    [Fact]
     public void Payer_sans_contact_et_avec_une_piece_test()
     {
         CarteBleuFaker cb = new("1234-1234-1234-1234", 10);
