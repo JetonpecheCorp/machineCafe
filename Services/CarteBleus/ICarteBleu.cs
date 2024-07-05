@@ -3,7 +3,7 @@
 public interface ICarteBleu
 {
     string Numero { get; init; }
-    double NbArgent { get; set; }
+    double NbArgent { get; }
 
     bool Debiter(EPiece _piece);
 }

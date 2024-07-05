@@ -2,8 +2,14 @@
 
 public class CarteBleuFaker : ICarteBleu
 {
-    public required string Numero { get; init; }
-    public required double NbArgent { get; set; }
+    public string Numero { get; init; }
+    public double NbArgent { get; set; }
+
+    public CarteBleuFaker(string _numero, double _nbArgent)
+    {
+        Numero = _numero;
+        NbArgent = _nbArgent;
+    }
 
     public bool Debiter(EPiece _piece)
     {
