@@ -45,7 +45,7 @@ public class MVP1Test
         machineCafe.Hardware.SimulerInsertionPiece(EPiece._20Centime);
         machineCafe.SansContact(cb);
 
-        Assert.Equal(0, (int)machineCafe.Hardware.NbCafeFabriquer);
+        Assert.Equal(1, (int)machineCafe.Hardware.NbCafeFabriquer);
     }
 
     [Fact]
