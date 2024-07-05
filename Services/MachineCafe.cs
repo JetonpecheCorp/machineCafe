@@ -33,10 +33,7 @@ public class MachineCafe
     public void SansContact(ICarteBleu _carteBleu)
     {
         if (ArgentTotal > 0)
-        {
             Hardware.RendreArgent();
-            return;
-        }
 
         bool payementValider = _carteBleu.Debiter(EPiece._50Centime);
 
