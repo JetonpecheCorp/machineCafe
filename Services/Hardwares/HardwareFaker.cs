@@ -12,8 +12,5 @@ public class HardwareFaker : IHardware
         return true;
     }
 
-    public void SimulerInsertionPiece(EPiece _piece)
-    {
-        CallbackInsertionPiece(_piece);
-    }
+    public void SimulerInsertionPiece(EPiece _piece) => CallbackInsertionPiece(_piece);
 }

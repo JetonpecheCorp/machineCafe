@@ -7,7 +7,6 @@ public class MachineCafe
     public IHardware Hardware { get; init; }
 
     public byte PrixCafe { get; }
-    public uint NbCafeServi { get; set; }
     public uint ArgentTotal { get; set; }
 
     public MachineCafe()
@@ -22,7 +21,7 @@ public class MachineCafe
         if ((byte)_piece < PrixCafe)
             return;
 
-        NbCafeServi++;
+        Hardware.CoulerCafe();
         ArgentTotal += (byte)_piece;
     }
 }
