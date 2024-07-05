@@ -26,7 +26,7 @@ public class MVP1Test
         CarteBleuFaker cb = new("1234-1234-1234-1234", 10);
         machineCafe.SansContact(cb);
 
-        Assert.Equal(1, (int)machineCafe.Hardware.NbCafeFabriquer);
+        Assert.Equal(1, (int)machineCafe.Hardware.NbCafeFabrique);
     }
 
     [Fact]
@@ -35,7 +35,7 @@ public class MVP1Test
         CarteBleuFaker cb = new("1234-1234-1234-1234", 0);
         machineCafe.SansContact(cb);
 
-        Assert.Equal(0, (int)machineCafe.Hardware.NbCafeFabriquer);
+        Assert.Equal(0, (int)machineCafe.Hardware.NbCafeFabrique);
     }
 
     [Fact]
@@ -45,7 +45,7 @@ public class MVP1Test
         machineCafe.Hardware.SimulerInsertionPiece(EPiece._20Centime);
         machineCafe.SansContact(cb);
 
-        Assert.Equal(0, (int)machineCafe.Hardware.NbCafeFabriquer);
+        Assert.Equal(0, (int)machineCafe.Hardware.NbCafeFabrique);
     }
 
     [Fact]
@@ -55,7 +55,7 @@ public class MVP1Test
         machineCafe.Hardware.SimulerInsertionPiece(EPiece._20Centime);
         machineCafe.Hardware.SimulerInsertionPiece(EPiece._10Centime);
 
-        Assert.Equal(1, (int)machineCafe.Hardware.NbCafeFabriquer);
+        Assert.Equal(1, (int)machineCafe.Hardware.NbCafeFabrique);
     }
 
     [Fact]
@@ -64,7 +64,7 @@ public class MVP1Test
         machineCafe.Hardware.SimulerInsertionPiece(EPiece._50Centime);
         machineCafe.Hardware.SimulerInsertionPiece(EPiece._50Centime);
 
-        Assert.Equal(2, (int)machineCafe.Hardware.NbCafeFabriquer);
+        Assert.Equal(2, (int)machineCafe.Hardware.NbCafeFabrique);
     }
 
     [Theory]
@@ -77,7 +77,7 @@ public class MVP1Test
     {
         machineCafe.Hardware.SimulerInsertionPiece(_piece);
 
-        Assert.Equal(0, (int)machineCafe.Hardware.NbCafeFabriquer);
+        Assert.Equal(0, (int)machineCafe.Hardware.NbCafeFabrique);
         Assert.Equal((int)_piece, (int)machineCafe.ArgentTotal);
     }
 
@@ -88,7 +88,7 @@ public class MVP1Test
     {
         machineCafe.Hardware.SimulerInsertionPiece(_piece);
 
-        Assert.Equal(1, (int)machineCafe.Hardware.NbCafeFabriquer);
+        Assert.Equal(1, (int)machineCafe.Hardware.NbCafeFabrique);
         Assert.Equal((int)_piece, (int)machineCafe.ArgentTotal);
     }
 }

@@ -6,14 +6,14 @@ public class HardwareFaker : IHardware
     public Action CallbackAnnuler { get; set; } = null!;
     public Action CallbackAccepter { get; set; } = null!;
 
-    public uint NbCafeFabriquer { get; set; }
+    public uint NbCafeFabrique { get; set; }
 
     public void SimulerInsertionPiece(EPiece _piece) => CallbackInsertionPiece(_piece);
 
 
     public bool CoulerCafe()
     {
-        NbCafeFabriquer++;
+        NbCafeFabrique++;
         return true;
     }
 

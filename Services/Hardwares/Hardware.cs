@@ -5,7 +5,7 @@ public class Hardware : IHardware
     public Action<EPiece> CallbackInsertionPiece { get; set; } = null!;
     public Action CallbackAnnuler { get; set; } = null!;
     public Action CallbackAccepter { get; set; } = null!;
-    public uint NbCafeFabriquer { get; set; }
+    public uint NbCafeFabrique { get; set; }
 
     public void AccepterArgent()
     {
@@ -14,7 +14,7 @@ public class Hardware : IHardware
 
     public bool CoulerCafe()
     {
-        NbCafeFabriquer++;
+        NbCafeFabrique++;
         return true;
     }
 

@@ -6,7 +6,7 @@ public interface IHardware
     Action CallbackAnnuler { get; set; }
     Action CallbackAccepter { get; set; }
 
-    uint NbCafeFabriquer { get; set; }
+    uint NbCafeFabrique { get; set; }
 
     bool CoulerCafe();
     void SimulerInsertionPiece(EPiece _piece);
