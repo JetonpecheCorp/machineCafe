@@ -43,7 +43,7 @@ public class MachineCafe
 
         carteBleu = _carteBleu;
 
-        bool payementValider = carteBleu!.Prelevement((int)EPiece._50Centime);
+        bool payementValider = carteBleu!.Prelevement((byte)EPiece._50Centime);
 
         if (!payementValider)
             return;
@@ -51,6 +51,9 @@ public class MachineCafe
         ArgentTotal += (byte)EPiece._50Centime;
 
         _carteBleu.Prelevement((byte)EPiece._50Centime);
-        Hardware.CoulerCafe();
+        bool cafeTerminer = Hardware.CoulerCafe();
+
+        if (!cafeTerminer)
+            _carteBleu.Remboursement((byte)EPiece._50Centime);
     }
 }
