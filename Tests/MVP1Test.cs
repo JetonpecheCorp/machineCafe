@@ -5,20 +5,21 @@ namespace Tests;
 
 public class MVP1Test
 {
-    readonly MachineCafe machineCafe = new()
-    {
-        Hardware = new HardwareFaker()
-    };
+    readonly MachineCafe machineCafe;
 
-    public void Setup()
+    public MVP1Test()
     {
+        machineCafe = new()
+        {
+            Hardware = new HardwareFaker()
+        };
+
         machineCafe.Hardware.CallbackInsertionPiece = machineCafe.Inserer;
     }
 
     [Fact]
     public void Servir_deux_cafe_test()
     {
-        Setup();
         machineCafe.Hardware.SimulerInsertionPiece(EPiece._50Centime);
         machineCafe.Hardware.SimulerInsertionPiece(EPiece._50Centime);
 
@@ -33,7 +34,6 @@ public class MVP1Test
     [InlineData(EPiece._20Centime)]
     public void Pas_assez_argent_servir_cafe_test(EPiece _piece)
     {
-        Setup();
         machineCafe.Hardware.SimulerInsertionPiece(_piece);
 
         Assert.Equal(0, (int)machineCafe.Hardware.NbCafeFabriquer);
@@ -45,11 +45,9 @@ public class MVP1Test
     [InlineData(EPiece._2Euro)]
     public void Trop_argent_servir_cafe_test(EPiece _piece)
     {
-        Setup();
         machineCafe.Hardware.SimulerInsertionPiece(_piece);
 
         Assert.Equal(1, (int)machineCafe.Hardware.NbCafeFabriquer);
         Assert.Equal((int)_piece, (int)machineCafe.ArgentTotal);
     }
-
 }
