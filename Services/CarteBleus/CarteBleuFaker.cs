@@ -11,13 +11,15 @@ public class CarteBleuFaker : ICarteBleu
         NbArgent = _nbArgent * 100;
     }
 
-    public bool Debiter(EPiece _piece)
+    public bool Prelevement(double _montant)
     {
-        if (NbArgent < (double)_piece)
+        if (NbArgent < _montant)
             return false;
 
-        NbArgent -= (double)_piece;
+        NbArgent -= _montant;
 
         return true;
     }
+
+    public void Remboursement(double _montant) => NbArgent += _montant;
 }

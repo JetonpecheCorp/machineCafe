@@ -5,19 +5,28 @@ namespace Services;
 
 public class MachineCafe
 {
-    public IHardware Hardware { get; init; }
+    public IHardware Hardware { get; private init; }
+    public IHardwareCarteBleu? HardwareCarteBleu { get; private init; } = null;
 
     public byte PrixCafe { get; }
     public uint ArgentTotal { get; private set; }
 
-    public MachineCafe()
+    ICarteBleu? carteBleu;
+
+    public MachineCafe(IHardware _hardware, IHardwareCarteBleu? _hardwareCarteBleu = null)
     {
-        Hardware = new Hardware();
+        Hardware = _hardware;
         Hardware.CallbackInsertionPiece = Inserer;
+
+        HardwareCarteBleu = _hardwareCarteBleu;
+
+        if(HardwareCarteBleu is not null)
+            HardwareCarteBleu.CallbackEnregistrerCarteBleu = PayerSansContact;
+
         PrixCafe = (byte)EPiece._50Centime;
     }
 
-    public void Inserer(EPiece _piece)
+    void Inserer(EPiece _piece)
     {
         ArgentTotal += (byte)_piece;
 
@@ -27,20 +36,21 @@ public class MachineCafe
         Hardware.CoulerCafe();
     }
 
-    public void Annuler() => ArgentTotal = 0;
-    public void Valider() => Hardware.CoulerCafe();
-
-    public void SansContact(ICarteBleu _carteBleu)
+    void PayerSansContact(ICarteBleu _carteBleu)
     {
         if (ArgentTotal > 0)
-            Hardware.RendreArgent();
+            ArgentTotal = 0;
 
-        bool payementValider = _carteBleu.Debiter(EPiece._50Centime);
+        carteBleu = _carteBleu;
+
+        bool payementValider = carteBleu!.Prelevement((int)EPiece._50Centime);
 
         if (!payementValider)
             return;
 
         ArgentTotal += (byte)EPiece._50Centime;
-        Hardware.AccepterArgent();
+
+        _carteBleu.Prelevement((byte)EPiece._50Centime);
+        Hardware.CoulerCafe();
     }
 }

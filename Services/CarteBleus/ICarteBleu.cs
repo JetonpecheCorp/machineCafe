@@ -2,8 +2,16 @@
 
 public interface ICarteBleu
 {
-    string Numero { get; init; }
-    double NbArgent { get; }
+   /// <summary>
+   /// Tente de prelever le montant sur la cart bleu
+   /// </summary>
+   /// <param name="_montant"></param>
+   /// <returns>true => OK / false => erreur</returns>
+    bool Prelevement(double _montant);
 
-    bool Debiter(EPiece _piece);
+    /// <summary>
+    /// Rembourse une somme sur la carte
+    /// </summary>
+    /// <param name="_montant">Montant a rembourser</param>
+    void Remboursement(double _montant);
 }

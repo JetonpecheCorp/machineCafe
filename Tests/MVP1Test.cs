@@ -10,21 +10,17 @@ public class MVP1Test
 
     public MVP1Test()
     {
-        machineCafe = new()
-        {
-            Hardware = new HardwareFaker()
-        };
-
-        machineCafe.Hardware.CallbackInsertionPiece = machineCafe.Inserer;
-        machineCafe.Hardware.CallbackAnnuler = machineCafe.Annuler;
-        machineCafe.Hardware.CallbackAccepter = machineCafe.Valider;
+        machineCafe = new(
+            new HardwareFaker(),
+            new HardwareCarteBleuFaker()
+        );
     }
 
     [Fact]
     public void Payer_sans_contact_test()
     {
         CarteBleuFaker cb = new("1234-1234-1234-1234", 10);
-        machineCafe.SansContact(cb);
+        machineCafe.HardwareCarteBleu!.SimulerPayementSansContact(cb);
 
         Assert.Equal(1, (int)machineCafe.Hardware.NbCafeFabrique);
     }
@@ -33,7 +29,7 @@ public class MVP1Test
     public void Payer_sans_contact_pas_assez_argent_test()
     {
         CarteBleuFaker cb = new("1234-1234-1234-1234", 0);
-        machineCafe.SansContact(cb);
+        machineCafe.HardwareCarteBleu!.SimulerPayementSansContact(cb);
 
         Assert.Equal(0, (int)machineCafe.Hardware.NbCafeFabrique);
     }
@@ -43,7 +39,8 @@ public class MVP1Test
     {
         CarteBleuFaker cb = new("1234-1234-1234-1234", 10);
         machineCafe.Hardware.SimulerInsertionPiece(EPiece._20Centime);
-        machineCafe.SansContact(cb);
+
+        machineCafe.HardwareCarteBleu!.SimulerPayementSansContact(cb);
 
         Assert.Equal(1, (int)machineCafe.Hardware.NbCafeFabrique);
     }
