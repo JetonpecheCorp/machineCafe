@@ -85,10 +85,7 @@ public class MachineCafe
         {
             var compte = ListeCompte
                 .Where(x => x.BadgeNFC.Id == badgeNFC?.Id)
-                .FirstOrDefault();
-
-            if (compte is null)
-                return;
+                .First();
 
             ArgentTotal = prelevement;
 
