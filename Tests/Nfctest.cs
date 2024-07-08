@@ -6,12 +6,14 @@ using Services.HardwareNFCs;
 namespace Tests;
 public class Nfctest
 {
+    MachineCafeBuilder builder = new();
+
     [Fact]
     public void Cas_nominal_test()
     {
         BadgeNFC nfc = new(1);
 
-        var machineCafe = new MachineCafe()
+        var machineCafe = builder
             .AjouterHadwareNfc(new HardwareNfc())
             .Build();
 
@@ -22,11 +24,31 @@ public class Nfctest
     }
 
     [Fact]
+    public void Cas_nominal_debit_argent_test()
+    {
+        BadgeNFC nfc = new(1);
+
+        var machineCafe = builder
+            .AjouterHadwareNfc(new HardwareNfc())
+            .Build();
+
+        var compte = machineCafe.ListeCompte.First();
+        uint argentDebut = compte.Argent;
+
+        machineCafe.HardwareNfc!.SimulerPresenterBage(nfc);
+        machineCafe.PayerParBadge();
+        machineCafe.HardwareNfc!.SimulerRetirerBage();
+
+        Assert.True(argentDebut > compte.Argent);
+        Assert.Equal(1, (int)machineCafe.Hardware.NbCafeFabrique);
+    }
+
+    [Fact]
     public void Cas_nominal_double_cafe_test()
     {
         BadgeNFC nfc = new(1);
 
-        var machineCafe = new MachineCafe()
+        var machineCafe = builder
             .AjouterHadwareNfc(new HardwareNfc())
             .Build();
 
@@ -44,7 +66,7 @@ public class Nfctest
     {
         BadgeNFC nfc = new(1);
 
-        var machineCafe = new MachineCafe()
+        var machineCafe = builder
             .AjouterHadwareNfc(new HardwareNfc())
             .Build();
 
@@ -62,7 +84,7 @@ public class Nfctest
         CarteBleuFaker cb = new("1234", 100);
         BadgeNFC nfc = new(1);
 
-        var machineCafe = new MachineCafe()
+        var machineCafe = builder
             .AjouterHadwareCarteBleu(new HardwareCarteBleuFaker())
             .AjouterHadwareNfc(new HardwareNfc())
             .Build();

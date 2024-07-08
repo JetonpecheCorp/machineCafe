@@ -8,14 +8,14 @@ namespace Services;
 
 public class MachineCafe
 {
-    public IHardware Hardware { get; private set; }
-    public IHardwareCarteBleu? HardwareCarteBleu { get; private set; } = null;
-    public IHardwareNfc? HardwareNfc { get; private set; } = null;
+    public IHardware Hardware { get; set; }
+    public IHardwareCarteBleu? HardwareCarteBleu { get; set; }
+    public IHardwareNfc? HardwareNfc { get; set; }
 
     public byte PrixCafe { get; }
     public uint ArgentTotal { get; private set; }
 
-    List<Compte> ListeCompte = [];
+    public List<Compte> ListeCompte { get; private set; } = [];
 
     ICarteBleu? carteBleu;
     IBadgeNFC? badgeNFC;
@@ -30,40 +30,7 @@ public class MachineCafe
         ListeCompte.Add(new Compte(1, new BadgeNFC(1), 100));
     }
 
-    public MachineCafe AjouterHadwareNfc(IHardwareNfc _hardwareNfc)
-    {
-        HardwareNfc = _hardwareNfc;
-        HardwareNfc.CallbackBadgePresenter = BadgePresenter;
-        HardwareNfc.CallbackBadgeRetirer = BadgeRetirer;
-
-        return this;
-    }
-
-    public MachineCafe AjouterHadwareCarteBleu(IHardwareCarteBleu _hardwareCarteBleu)
-    {
-        HardwareCarteBleu = _hardwareCarteBleu;
-        HardwareCarteBleu.CallbackEnregistrerCarteBleu = PayerSansContact;
-
-        return this;
-    }
-
-    public MachineCafe ModifierHardware(IHardware _hardware)
-    {
-        Hardware = _hardware;
-        Hardware.CallbackInsertionPiece = Inserer;
-
-        return this;
-    }
-
-    public MachineCafe Build()
-    {
-        if(Hardware is null)
-            ModifierHardware(new HardwareFaker());
-
-        return this;
-    }
-
-    void Inserer(EPiece _piece)
+    public void Inserer(EPiece _piece)
     {
         ArgentTotal += (byte)_piece;
 
@@ -76,7 +43,7 @@ public class MachineCafe
         Hardware.CoulerCafe();
     }
 
-    void PayerSansContact(ICarteBleu? _carteBleu)
+    public void PayerSansContact(ICarteBleu? _carteBleu)
     {
         if (_carteBleu is null)
             return;
@@ -111,7 +78,17 @@ public class MachineCafe
             _carteBleu.Remboursement((byte)EPiece._50Centime);
     }
 
-    void BadgePresenter(IBadgeNFC _badgeNfc)
+    public void PayerParBadge()
+    {
+        var compte = ListeCompte.Where(x => x.BadgeNFC.Id == badgeNFC?.Id).First();
+
+        if (compte.Argent <= 0 || compte.Argent - (byte)EPiece._50Centime < 0)
+            return;
+
+        compte.Argent -= (byte)EPiece._50Centime;
+    }
+
+    public void BadgePresenter(IBadgeNFC _badgeNfc)
     {
         var compte = ListeCompte.Where(x => x.BadgeNFC.Id == _badgeNfc.Id).FirstOrDefault();
 
@@ -128,7 +105,7 @@ public class MachineCafe
         badgeEstPresent = true;
     }
 
-    void BadgeRetirer()
+    public void BadgeRetirer()
     {
         badgeEstPresent = false;
 
