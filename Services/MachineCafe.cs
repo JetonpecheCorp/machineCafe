@@ -2,7 +2,6 @@
 using Services.CarteBleus;
 using Services.HardwareNFCs;
 using Services.Hardwares;
-using System.Numerics;
 
 namespace Services;
 
