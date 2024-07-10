@@ -1,6 +1,7 @@
 ﻿using Services;
 using Services.BadgeNFCs;
 using Services.CarteBleus;
+using Services.CarteBleus.HardwareCarteBleu;
 using Services.HardwareNFCs;
 
 namespace Tests;
