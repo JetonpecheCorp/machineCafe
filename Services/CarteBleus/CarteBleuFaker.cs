@@ -2,12 +2,10 @@
 
 public class CarteBleuFaker : ICarteBleu
 {
-    public string Numero { get; init; }
     public double NbArgent { get; set; }
 
-    public CarteBleuFaker(string _numero, double _nbArgent)
+    public CarteBleuFaker(double _nbArgent)
     {
-        Numero = _numero;
         NbArgent = _nbArgent * 100;
     }
 

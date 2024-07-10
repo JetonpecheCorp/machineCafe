@@ -81,7 +81,7 @@ public class Nfctest
     [Fact]  
     public void Recharger_compte_carte_bleu_test()
     {
-        CarteBleuFaker cb = new("1234", 100);
+        CarteBleuFaker cb = new(100);
         BadgeNFC nfc = new(1);
 
         var machineCafe = builder
