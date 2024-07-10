@@ -1,4 +1,4 @@
-﻿namespace Services.CarteBleus;
+﻿namespace Services.CarteBleus.HardwareCarteBleu;
 
 public interface IHardwareCarteBleu
 {
@@ -6,6 +6,4 @@ public interface IHardwareCarteBleu
     /// Enregistre la CB
     /// </summary>
     Action<ICarteBleu> CallbackEnregistrerCarteBleu { get; set; }
-
-    void SimulerPayementSansContact(ICarteBleu _carteBleu);
 }

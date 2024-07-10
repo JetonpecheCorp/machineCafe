@@ -1,5 +1,6 @@
 using Services;
 using Services.CarteBleus;
+using Services.CarteBleus.HardwareCarteBleu;
 
 namespace Tests;
 

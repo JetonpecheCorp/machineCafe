@@ -7,5 +7,4 @@ public interface IHardware
     uint NbCafeFabrique { get; set; }
 
     bool CoulerCafe();
-    void SimulerInsertionPiece(EPiece _piece);
 }

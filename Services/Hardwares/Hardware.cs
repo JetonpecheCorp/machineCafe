@@ -10,6 +10,4 @@ public class Hardware : IHardware
         NbCafeFabrique++;
         return true;
     }
-
-    public void SimulerInsertionPiece(EPiece _piece) => CallbackInsertionPiece(_piece);
 }

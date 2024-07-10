@@ -1,4 +1,4 @@
-﻿using Services.CarteBleus;
+﻿using Services.CarteBleus.HardwareCarteBleu;
 using Services.HardwareNFCs;
 using Services.Hardwares;
 
@@ -6,9 +6,9 @@ namespace Services;
 
 public class MachineCafeBuilder
 {
-    MachineCafe MachineCafe { get; set; } = new();
+    MachineCafeFaker MachineCafe { get; set; } = new();
 
-    public MachineCafeBuilder AjouterHadwareNfc(IHardwareNfc _hardwareNfc)
+    public MachineCafeBuilder AjouterHadwareNfc(IHardwareNfcFaker _hardwareNfc)
     {
         MachineCafe.HardwareNfc = _hardwareNfc;
         MachineCafe.HardwareNfc.CallbackBadgePresenter = MachineCafe.BadgePresenter;
@@ -17,7 +17,7 @@ public class MachineCafeBuilder
         return this;
     }
 
-    public MachineCafeBuilder AjouterHadwareCarteBleu(IHardwareCarteBleu _hardwareCarteBleu)
+    public MachineCafeBuilder AjouterHadwareCarteBleu(IHardwareCarteBleuFaker _hardwareCarteBleu)
     {
         MachineCafe.HardwareCarteBleu = _hardwareCarteBleu;
         MachineCafe.HardwareCarteBleu.CallbackEnregistrerCarteBleu = MachineCafe.PayerSansContact;
@@ -25,7 +25,7 @@ public class MachineCafeBuilder
         return this;
     }
 
-    public MachineCafeBuilder ModifierHardware(IHardware _hardware)
+    public MachineCafeBuilder ModifierHardware(IHardwareFaker _hardware)
     {
         MachineCafe.Hardware = _hardware;
         MachineCafe.Hardware.CallbackInsertionPiece = MachineCafe.Inserer;
@@ -33,7 +33,7 @@ public class MachineCafeBuilder
         return this;
     }
 
-    public MachineCafe Build()
+    public MachineCafeFaker Build()
     {
         if (MachineCafe.Hardware is null)
             ModifierHardware(new HardwareFaker());

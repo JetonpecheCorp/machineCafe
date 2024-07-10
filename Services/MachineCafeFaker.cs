@@ -1,15 +1,16 @@
 ﻿using Services.BadgeNFCs;
 using Services.CarteBleus;
+using Services.CarteBleus.HardwareCarteBleu;
 using Services.HardwareNFCs;
 using Services.Hardwares;
 
 namespace Services;
 
-public class MachineCafe
+public class MachineCafeFaker
 {
-    public IHardware Hardware { get; set; }
-    public IHardwareCarteBleu? HardwareCarteBleu { get; set; }
-    public IHardwareNfc? HardwareNfc { get; set; }
+    public IHardwareFaker Hardware { get; set; }
+    public IHardwareCarteBleuFaker? HardwareCarteBleu { get; set; }
+    public IHardwareNfcFaker? HardwareNfc { get; set; }
 
     public byte PrixCafe { get; }
     public uint ArgentTotal { get; private set; }
@@ -22,7 +23,7 @@ public class MachineCafe
     bool badgeEstPresent = false;
     ushort prelevement = 1_000;
 
-    public MachineCafe()
+    public MachineCafeFaker()
     {
         PrixCafe = (byte)EPiece._50Centime;
 

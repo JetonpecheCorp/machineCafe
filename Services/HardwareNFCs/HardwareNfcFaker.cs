@@ -2,7 +2,7 @@
 using Services.BadgeNFCs;
 
 namespace Services.HardwareNFCs;
-public class HardwareNfc : IHardwareNfc
+public class HardwareNfcFaker : IHardwareNfcFaker
 {
     public Action<IBadgeNFC> CallbackBadgePresenter { get; set; } = null!;
     public Action CallbackBadgeRetirer { get; set; } = null!;

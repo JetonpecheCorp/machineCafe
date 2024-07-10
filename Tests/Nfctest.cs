@@ -14,7 +14,7 @@ public class Nfctest
         BadgeNFC nfc = new(1);
 
         var machineCafe = builder
-            .AjouterHadwareNfc(new HardwareNfc())
+            .AjouterHadwareNfc(new HardwareNfcFaker())
             .Build();
 
         machineCafe.HardwareNfc!.SimulerPresenterBage(nfc);
@@ -29,7 +29,7 @@ public class Nfctest
         BadgeNFC nfc = new(1);
 
         var machineCafe = builder
-            .AjouterHadwareNfc(new HardwareNfc())
+            .AjouterHadwareNfc(new HardwareNfcFaker())
             .Build();
 
         var compte = machineCafe.ListeCompte.First();
@@ -49,7 +49,7 @@ public class Nfctest
         BadgeNFC nfc = new(1);
 
         var machineCafe = builder
-            .AjouterHadwareNfc(new HardwareNfc())
+            .AjouterHadwareNfc(new HardwareNfcFaker())
             .Build();
 
         machineCafe.HardwareNfc!.SimulerPresenterBage(nfc);
@@ -67,7 +67,7 @@ public class Nfctest
         BadgeNFC nfc = new(1);
 
         var machineCafe = builder
-            .AjouterHadwareNfc(new HardwareNfc())
+            .AjouterHadwareNfc(new HardwareNfcFaker())
             .Build();
 
         machineCafe.HardwareNfc!.SimulerPresenterBage(nfc);
@@ -86,7 +86,7 @@ public class Nfctest
 
         var machineCafe = builder
             .AjouterHadwareCarteBleu(new HardwareCarteBleuFaker())
-            .AjouterHadwareNfc(new HardwareNfc())
+            .AjouterHadwareNfc(new HardwareNfcFaker())
             .Build();
 
         machineCafe.HardwareNfc!.SimulerPresenterBage(nfc);
