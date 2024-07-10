@@ -6,7 +6,7 @@ namespace Services;
 
 public class MachineCafeBuilder
 {
-    MachineCafeFaker MachineCafe { get; set; } = new();
+    MachineCafeHarness MachineCafe { get; set; } = new();
 
     public MachineCafeBuilder AjouterHadwareNfc(IHardwareNfcFaker _hardwareNfc)
     {
@@ -33,7 +33,7 @@ public class MachineCafeBuilder
         return this;
     }
 
-    public MachineCafeFaker Build()
+    public MachineCafeHarness Build()
     {
         if (MachineCafe.Hardware is null)
             ModifierHardware(new HardwareFaker());

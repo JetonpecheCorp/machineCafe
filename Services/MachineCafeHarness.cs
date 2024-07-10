@@ -6,7 +6,7 @@ using Services.Hardwares;
 
 namespace Services;
 
-public class MachineCafeFaker
+public class MachineCafeHarness
 {
     public IHardwareFaker Hardware { get; set; }
     public IHardwareCarteBleuFaker? HardwareCarteBleu { get; set; }
@@ -23,7 +23,7 @@ public class MachineCafeFaker
     bool badgeEstPresent = false;
     ushort prelevement = 1_000;
 
-    public MachineCafeFaker()
+    public MachineCafeHarness()
     {
         PrixCafe = (byte)EPiece._50Centime;
 
